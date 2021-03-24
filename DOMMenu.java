@@ -5,9 +5,6 @@ import javax.xml.parsers.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.xpath.*;
 import javax.xml.validation.*;
-import javax.xml.transform.*;
-
-//import com.sun.xml.internal.bind.marshaller.NioEscapeHandler;
 import org.w3c.dom.*;
 
 /**
@@ -31,7 +28,7 @@ public class DOMMenu {
     /**
      * XPath expression path
      */
-    private static XPath path = null;
+    private static XPath path = null; // expression needed to be changed to path for path to work (or all 'path' to expression)
 
     /**
      * XML Schema for validation
@@ -87,7 +84,7 @@ public class DOMMenu {
             schema = factory.newSchema(new File(filename));
             Validator validator = schema.newValidator();
             validator.validate(new DOMSource(document));
-            System.out.println("Validated :)");
+            System.out.println("Validated :)"); // message for when file has passed validation
             return true;
         } catch (Exception e) {
             System.err.println(e);
@@ -100,10 +97,35 @@ public class DOMMenu {
      * Print nodes using DOM methods and XPath queries
      */
     private static void printNodes() {
-        Node menuItem_1 = document.getFirstChild();
-        Node menuItem_2 = menuItem_1.getFirstChild();
-        System.out.println("First child is: " + menuItem_1.getNodeName());
-        System.out.println("  Child is: " + menuItem_2.getNodeName());
+        //Node menuItem_1 = document.getFirstChild();
+        //Node menuItem_2 = menuItem_1.getFirstChild();
+        //System.out.println("First child is: " + menuItem_1.getNodeName());
+        //System.out.println("  Child is: " + menuItem_2.getNodeName() + "\n");
+
+        System.out.println("Today's small menue is: \n");
+
+        // Printing out starters
+        Node starter_1 = document.getElementsByTagName("item").item(0);// getting first item element from xml document
+        System.out.println(starter_1.getTextContent());
+        Node starter_2 = document.getElementsByTagName("item").item(1);// getting second item element from xml document
+        System.out.println(starter_2.getTextContent());
+        Node starter_3 = document.getElementsByTagName("item").item(2);// getting third item element from xml document
+        System.out.println(starter_3.getTextContent());
+
+        // Printing out mains
+        Node main_1 = document.getElementsByTagName("item").item(3);// getting fourth item element from xml document
+        System.out.println(main_1.getTextContent());
+        Node main_2 = document.getElementsByTagName("item").item(4);// getting fifth item element from xml document
+        System.out.println(main_2.getTextContent());
+        Node main_3 = document.getElementsByTagName("item").item(5);// getting sixth item element from xml document
+        System.out.println(main_3.getTextContent());
+
+        // Printing out desserts
+        Node dessert_1 = document.getElementsByTagName("item").item(6);// getting seventh element from xml document
+        System.out.println(dessert_1.getTextContent());
+        Node dessert_2 = document.getElementsByTagName("item").item(7);// getting eighth element from xml document
+        System.out.println(dessert_2.getTextContent());
+
     }
 
     /**
